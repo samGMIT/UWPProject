@@ -83,22 +83,25 @@ namespace UWPProject2017
             await photo.CopyAsync(destinationFolder, picName, NameCollisionOption.ReplaceExisting);
             AddtoDisplay(picName);
             
-        //    IRandomAccessStream stream = await photo.OpenAsync(FileAccessMode.Read);
-        //    BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
-        //    SoftwareBitmap softwareBitmap = await decoder.GetSoftwareBitmapAsync();
-
-        //    SoftwareBitmap softwareBitmapBGR8 = SoftwareBitmap.Convert(softwareBitmap,
-        //BitmapPixelFormat.Bgra8,
-        //BitmapAlphaMode.Premultiplied);
-
-        //    SoftwareBitmapSource bitmapSource = new SoftwareBitmapSource();
-        //    await bitmapSource.SetBitmapAsync(softwareBitmapBGR8);
-
-        //    imageControl.Source = bitmapSource;
-        //    await photo.DeleteAsync();
+       
 
         }
 
+        private void playPauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            
 
+            if(String.Compare(playPauseButton.Content.ToString(), "Pause") == 0)
+            {
+                Display.Pause();
+                playPauseButton.Content = "Play";
+            }
+            else
+            {
+                Display.Play();
+                playPauseButton.Content = "Pause";
+            }
+
+        }
     }
 }

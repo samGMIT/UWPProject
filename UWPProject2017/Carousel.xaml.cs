@@ -28,6 +28,8 @@ namespace UWPProject2017
     new Windows.UI.Xaml.Media.Animation.Storyboard();
         private List<CarouselImage> list = new List<CarouselImage>();
 
+        private bool playing = true;
+
         
        
         private void layout(ref Canvas display)
@@ -49,6 +51,7 @@ namespace UWPProject2017
                 item.RenderTransform = new ScaleTransform();
                 item.Opacity = ((ScaleTransform)item.RenderTransform).ScaleX =
                     ((ScaleTransform)item.RenderTransform).ScaleY = carouselImage.Distance;
+                
                 item.Tag = carouselImage;
                 display.Children.Add(item);
             }
@@ -56,7 +59,12 @@ namespace UWPProject2017
 
         private void rotate()
         {
-           
+            if (!playing)
+            {
+                animation.Begin();
+                return;
+            }
+            int itemNo = 0;
             foreach (Image item in Display.Children)
             {
                 CarouselImage carouselImage = (CarouselImage)item.Tag;
@@ -66,12 +74,26 @@ namespace UWPProject2017
                 Canvas.SetTop(item, carouselImage.Position.Y);
                 carouselImage.UpdateZOrder();
                 Canvas.SetZIndex(item, carouselImage.getZOrder());
-                   
-               // item.Opacity = ((ScaleTransform)item.RenderTransform).ScaleX =
-                 //   ((ScaleTransform)item.RenderTransform).ScaleY = carouselImage.Distance;
+
+                
+
+                    // item.Opacity = ((ScaleTransform)item.RenderTransform).ScaleX =
+                    //   ((ScaleTransform)item.RenderTransform).ScaleY = carouselImage.Distance;
+                itemNo++;
             }
             animation.Begin();
         }
+        public void Pause()
+        {
+            this.playing = false;
+
+        }
+        public void Play()
+        {
+            this.playing = true;
+
+        }
+
 
         private void init()
         {
