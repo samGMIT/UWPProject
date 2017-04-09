@@ -28,17 +28,45 @@ namespace UWPProject2017
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        int photoNumber = 1;
+
         public MainPage()
         {
             this.InitializeComponent();
+        }
+       async private void AddtoDisplay(String filename)
+        {
+                
+            Windows.Storage.StorageFile sampleFile = await ApplicationData.Current.LocalFolder.GetFileAsync(filename);
+
+            BitmapImage bitmapImage = new BitmapImage();
+            FileRandomAccessStream stream = (FileRandomAccessStream)await sampleFile.OpenAsync(FileAccessMode.Read);
+
+            bitmapImage.SetSource(stream);
+
+
+            //BitmapImage pic = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(Value.Text));
+            Display.Add(bitmapImage);
+           
+        }
+
+        private void New_Click(object sender, RoutedEventArgs e)
+        {
+            Display.New();
+        }
+
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            Display.RemoveLast();
         }
 
         private async void button_Click(object sender, RoutedEventArgs e)
         {
             CameraCaptureUI captureUI = new CameraCaptureUI();
+
             captureUI.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Jpeg;
             captureUI.PhotoSettings.CroppedSizeInPixels = new Size(200, 200);
-
+           
             StorageFile photo = await captureUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
 
             if (photo == null)
@@ -46,25 +74,28 @@ namespace UWPProject2017
                 // User cancelled photo capture
                 return;
             }
-            StorageFolder destinationFolder =
-    await ApplicationData.Current.LocalFolder.CreateFolderAsync("ProfilePhotoFolder",
-        CreationCollisionOption.OpenIfExists);
+            StorageFolder destinationFolder = ApplicationData.Current.LocalFolder;
+            //await ApplicationData.Current.LocalFolder.CreateFolderAsync("ProfilePhotoFolder",
+            //  CreationCollisionOption.OpenIfExists);
+            String picName = "ProfilePhoto" + photoNumber + ".jpg";
+            photoNumber++;
 
-            await photo.CopyAsync(destinationFolder, "ProfilePhoto.jpg", NameCollisionOption.ReplaceExisting);
+            await photo.CopyAsync(destinationFolder, picName, NameCollisionOption.ReplaceExisting);
+            AddtoDisplay(picName);
             
-            IRandomAccessStream stream = await photo.OpenAsync(FileAccessMode.Read);
-            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
-            SoftwareBitmap softwareBitmap = await decoder.GetSoftwareBitmapAsync();
+        //    IRandomAccessStream stream = await photo.OpenAsync(FileAccessMode.Read);
+        //    BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
+        //    SoftwareBitmap softwareBitmap = await decoder.GetSoftwareBitmapAsync();
 
-            SoftwareBitmap softwareBitmapBGR8 = SoftwareBitmap.Convert(softwareBitmap,
-        BitmapPixelFormat.Bgra8,
-        BitmapAlphaMode.Premultiplied);
+        //    SoftwareBitmap softwareBitmapBGR8 = SoftwareBitmap.Convert(softwareBitmap,
+        //BitmapPixelFormat.Bgra8,
+        //BitmapAlphaMode.Premultiplied);
 
-            SoftwareBitmapSource bitmapSource = new SoftwareBitmapSource();
-            await bitmapSource.SetBitmapAsync(softwareBitmapBGR8);
+        //    SoftwareBitmapSource bitmapSource = new SoftwareBitmapSource();
+        //    await bitmapSource.SetBitmapAsync(softwareBitmapBGR8);
 
-            imageControl.Source = bitmapSource;
-            await photo.DeleteAsync();
+        //    imageControl.Source = bitmapSource;
+        //    await photo.DeleteAsync();
 
         }
 
