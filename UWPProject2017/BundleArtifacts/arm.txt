@@ -1,0 +1,4 @@
+MainPackage=C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\bin\ARM\Release\UWPProject2017_1.1.17.0_ARM.appx
+SymbolPackage=C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\AppPackages\UWPProject2017_1.1.17.0_Test\UWPProject2017_1.1.17.0_ARM.appxsym
+ResourcePack=C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\bin\ARM\Release\UWPProject2017_1.1.17.0_scale-100.appx
+ResourcePack=C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\bin\ARM\Release\UWPProject2017_1.1.17.0_scale-400.appx

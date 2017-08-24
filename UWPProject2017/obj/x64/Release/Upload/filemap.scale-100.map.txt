@@ -1,0 +1,12 @@
+﻿[ResourceMetadata]
+"ResourceId"			"filemap.scale-100"
+"ResourceDimensions"		"scale-100"
+
+[Files]
+"C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\obj\x64\Release\Upload\filemap.scale-100.pri"			"resources.pri"
+"C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\obj\x64\Release\PackageUploadLayout\Assets\Wide310x150Logo.scale-100.png"			"Assets\Wide310x150Logo.scale-100.png"
+"C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\obj\x64\Release\PackageUploadLayout\Assets\Square71x71Logo.scale-100.png"			"Assets\Square71x71Logo.scale-100.png"
+"C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\obj\x64\Release\PackageUploadLayout\Assets\Square310x310Logo.scale-100.png"			"Assets\Square310x310Logo.scale-100.png"
+"C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\obj\x64\Release\PackageUploadLayout\Assets\Square150x150Logo.scale-100.png"			"Assets\Square150x150Logo.scale-100.png"
+"C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\obj\x64\Release\PackageUploadLayout\Assets\SplashScreen.scale-100.png"			"Assets\SplashScreen.scale-100.png"
+"C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\obj\x64\Release\PackageUploadLayout\Assets\44piximages.scale-100.png"			"Assets\44piximages.scale-100.png"

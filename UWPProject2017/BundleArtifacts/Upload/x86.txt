@@ -1,0 +1,2 @@
+MainPackage=C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\bin\x86\Release\Upload\UWPProject2017_1.1.19.0_x86.appx
+SymbolPackage=C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\AppPackages\UWPProject2017_1.1.19.0\UWPProject2017_1.1.19.0_x86.appxsym

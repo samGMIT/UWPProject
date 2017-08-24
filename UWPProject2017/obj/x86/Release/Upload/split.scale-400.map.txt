@@ -1,0 +1,7 @@
+﻿[ResourceMetadata]
+"ResourceId"			"split.scale-400"
+"ResourceDimensions"		"scale-400"
+
+[Files]
+"C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\obj\x86\Release\Upload\split.scale-400.pri"			"resources.pri"
+"C:\Users\Abuchie\Documents\Visual Studio 2015\Projects\UWPProject2017\UWPProject2017\obj\x86\Release\PackageUploadLayout\Assets\Square150x150Logo.scale-400.png"			"Assets\Square150x150Logo.scale-400.png"

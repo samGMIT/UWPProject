@@ -19,6 +19,9 @@ using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Media.Imaging;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Contacts;
+using System.Diagnostics;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace UWPProject2017
@@ -28,6 +31,7 @@ namespace UWPProject2017
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        List<StorageFile> photos = new List<StorageFile>();
         int photoNumber = 1;
 
         public MainPage()
@@ -74,6 +78,8 @@ namespace UWPProject2017
                 // User cancelled photo capture
                 return;
             }
+            // add photo to photos array
+            photos.Add(photo);
             StorageFolder destinationFolder = ApplicationData.Current.LocalFolder;
             //await ApplicationData.Current.LocalFolder.CreateFolderAsync("ProfilePhotoFolder",
             //  CreationCollisionOption.OpenIfExists);
@@ -101,6 +107,63 @@ namespace UWPProject2017
                 Display.Play();
                 playPauseButton.Content = "Pause";
             }
+
+        }
+
+        private async void btnSend_Click(object sender, RoutedEventArgs e)
+        {
+            ContactPicker contactPicker = new ContactPicker();
+
+            contactPicker.DesiredFieldsWithContactFieldType.Add(ContactFieldType.Email);
+
+            Contact contact = await contactPicker.PickContactAsync();
+
+            if (contact != null)
+            {
+                try
+                {
+                    await ComposeEmail(contact, txtEmailText.Text, photos.ToArray());
+                }catch (Exception exc)
+                {
+                    Debug.Write(exc.Data);
+                }
+               
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private async Task ComposeEmail(Windows.ApplicationModel.Contacts.Contact recipient,
+        string messageBody,
+        StorageFile[] attachmentFiles)
+        {
+            var emailMessage = new Windows.ApplicationModel.Email.EmailMessage();
+            emailMessage.Body = messageBody;
+
+            if (attachmentFiles != null)
+            {
+                for(int i = 0; i < attachmentFiles.Length; i++)
+                {
+                    var stream = Windows.Storage.Streams.RandomAccessStreamReference.CreateFromFile(attachmentFiles[i]);
+
+                    var attachment = new Windows.ApplicationModel.Email.EmailAttachment(
+                        attachmentFiles[i].Name,
+                        stream);
+
+                    emailMessage.Attachments.Add(attachment);
+                }
+            }
+
+            var email = recipient.Emails.FirstOrDefault<Windows.ApplicationModel.Contacts.ContactEmail>();
+            if (email != null)
+            {
+                var emailRecipient = new Windows.ApplicationModel.Email.EmailRecipient(email.Address);
+                emailMessage.To.Add(emailRecipient);
+            }
+
+            await Windows.ApplicationModel.Email.EmailManager.ShowComposeNewEmailAsync(emailMessage);
 
         }
     }
